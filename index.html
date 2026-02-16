@@ -204,64 +204,64 @@
 
     <script>
         // เก็บ Template ข้อความไว้ (แทนที่จำนวนข้อด้วย {{num}})
-        const promptTemplate = `Act as a Medical Education Assistant and JavaScript Developer.
+        const promptTemplate = `Act as a Senior Medical Education Specialist and JavaScript Developer.
 
-Your task is to generate {{num}} high-quality medical questions based on the provided Learning Objectives, Slide Content, and Sample Exam styles. You must output the result strictly as a specific JavaScript Array structure.
+Your task is to generate {{num}} high-quality medical questions based on the provided "Learning Objectives", "Slide Content", and "Sample Exam". You must output the result strictly as a valid JavaScript variable assignment.
 
-Input: Read the provided content (Slides/Objectives/Samples) provided below.
+Input Data:
+1. Learning Objectives & Slides: [Insert Content Here]
+2. Sample Exam Style: [Insert Sample Questions Here]
+
 Output Format:
-Please generate the output as a variable assignment: allquestionN : [ ... ]
+Generate a single variable assignment:
+var allquestionN = [ ... ];
 
-Object Structure:
-Each question must be an object in this exact format:
+Object Structure (Must be exact):
 {
-problem: "Question text here (English)",
-img: "",
-choices: "Choice1///Choice2///Choice3///Choice4///Choice5",
-answer: "Correct Answer (English)",
-select: "",
-explain: "Explanation here (Thai + Medical Terms)",
-state: false
+    problem: "Question text here (English)",
+    img: "",
+    choices: "Choice1///Choice2///Choice3///Choice4///Choice5",
+    answer: "Correct Answer (English)",
+    select: "",
+    explain: "Explanation here (Thai + Medical Terms)",
+    state: false
 }
 
-Strict Rules & Logic for Question Generation:
+STRICT RULES & LOGIC:
 
-1. Question Design (Systematic Thinking):
-- Generate exactly {{num}} questions covering Basic Science, Clinical, and Case scenarios based on the input topics.
-- Difficulty: Moderate to Challenge. Focus on "Why" and "How" (anatomy, pathophysiology, clinical reasoning, management steps) rather than simple factual recall.
-- Language: Problem and Choices must be in ENGLISH only.
-- Structure: Include the question number in the problem text (e.g., "1. A 45-year-old male presents with...").
-- Case Vignettes: Keep them concise but include key vital signs or lab values if necessary.
+1. Question Design (Mimic Sample Exam Style):
+   - Content: Generate questions covering Basic Science, Clinical Diagnosis, and Management based on the input topics.
+   - Style: Use "Clinical Vignettes" (Case scenarios). Include Age, Gender, Chief Complaint, HPI, Vital Signs, and Lab values where appropriate (e.g., "A 45-year-old male presents with... BP 140/90...") Or basic science questions that require analytical thinking before arriving at an answer.
+   - Complexity: Moderate to Hard. Focus on "Why" (Mechanism) and "What is the next best step" rather than simple recall.
+   - Language: Problem and Choices must be in ENGLISH.
+   - Numbering: Start the problem text with the number (e.g., "1. A patient...").
 
-2. Choices Formatting:
-- Provide exactly 5 choices per question.
-- Use exactly /// as the separator.
-- CRITICAL: Do NOT put any spaces before or after /// (e.g., "A///B///C" is correct).
-- Distractors: Must be plausible and related to the topic. All choices should be of similar length and complexity to avoid guessing by length.
-- Language: Choices must be in ENGLISH only.
+2. Choices Formatting (Strict Syntax):
+   - Provide exactly 5 choices per question.
+   - Use exactly "///" as the separator.
+   - CRITICAL: Do NOT put any spaces before or after "///" (Correct: "A///B///C", Incorrect: "A /// B").
+   - Distractors: Must be plausible medical distractors. Avoid obvious wrong answers. Choices should be homogeneous in length and grammatical structure.
 
 3. Answer Matching:
-- The answer property must be a string EXACT match to one of the segments in the choices string.
+   - The answer property must be an EXACT string match to one of the segments in the choices string.
 
-4. Explanation Logic:
-- Explain why the other distractors are wrong/incorrect (Rule out the wrong choices).
-Write in Thai mixed with Medical Terms (Thai/Eng).
-Tone: Simple and easy for medical students to apply clinically.
-Constraint: Do NOT use special characters (like unescaped double quotes, backslashes, or line breaks) inside the string to prevent JavaScript parsing errors. Keep it a single line string.
-- Language: Write in THAI mixed with English Medical Terms.
-- Content: Explain clearly why the correct answer is right and rule out why the other distractors are wrong.
-- Tone: Educational, simple for medical students to apply clinically.
-- Constraint: Remove all citations/references.
+4. Explanation Logic (High-Quality Clinical Reasoning):
+   - The explanation must be structured using Clinical Reasoning (ไทย ผสมกับ English medical terminology). Follow this content for every question (written as a continuous professional paragraph):
+     - Key Concept Start by identifying the diagnosis based on the key findings in the vignette (symptoms, labs).
+     - Supporting Evidence (Why Correct?) Explain why the correct answer is the "Gold Standard" or "Best Step". Cite specific clues from the question.
+     - Systematic Rule-Out (CRITICAL) briefly explain why EACH of the other 4 distractors is incorrect.
+        - Example style: "ส่วนข้อ B ผิดเพราะ... (Incorrect because...)", "ข้อ C มักใช้ในกรณี... แต่ผู้ป่วยรายนี้...".
+     - Clinical Pearl (Optional) Add "High-Yield" fact useful for exams.
+     - Write the explanation like someone were explaining it, and rephrasing the sentences.
+    Tone: Professional yet easy to digest for medical students. Never use repetitive phrases like "The correct answer is A." or "คำตอบที่ถูกต้องคือ A" Go straight to the reasoning.
+5. Technical Constraints (JavaScript Safety):
+   - Output ONLY the code. No markdown conversational text before/after.
+   - String Safety: Do NOT use line breaks (
+) inside strings. Keep everything on a single line.
+   - Escape Characters: Carefully escape double quotes inside strings if necessary (e.g., "text").
+   - Default Values: Keep img: "", select: "", and state: false.
 
-5. Code & String Constraints:
-- Output only the variable \`allquestionN\`.
-- Do NOT use special characters inside strings that break JSON (e.g., use single quotes for internal text if needed, but the JSON values must be double-quoted).
-- Do NOT use line breaks inside the strings. Keep everything single-line.
-- Keep \`img\` as empty string "".
-- Keep \`select\` as empty string "".
-- Keep \`state\` as false.
-
-Start processing the input content now and generate the code:
+Start processing the input content now and generate the allquestionN array.
 
 [SAMPLE EXAM] - for style reference.
 
